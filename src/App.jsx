@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { HomePage } from './components/HomePage'
 import { Header } from './components/Header'
 import { FileDisplay } from './components/FileDisplay'
+import { Information } from './components/Information'
+import { Transcribing } from './components/Transcribing'
 
 
 function App() {
@@ -11,6 +13,8 @@ function App() {
   const [recordingStatus, setRecordingStatus] = useState('inactive')
   const [audioChunks, setAudioChunks] = useState([])
   const [duration, setDuration] = useState(0)
+  const [isLoading, setLoading] = useState(true)
+  const [output, setOutput] = useState(null)
 
 
   const isAudioAvailable = audioStream || file
@@ -83,7 +87,8 @@ function App() {
       <div className="flex flex-col max-w-[1000px] mx-auto w-full">
         <section className="min-h-screen flex flex-col">
             <Header/>
-            {
+            {output ? <Information/> : 
+            isLoading ? <Transcribing/> :
             !isAudioAvailable ?
               <HomePage setFile={setFile} setAudioStream={setAudioStream} recordingStatus={recordingStatus} SetRecordingStatus={setRecordingStatus} duration={duration} setDuration={setDuration} startRecording={startRecording} stopRecording={stopRecording}/> :
                <FileDisplay file={file} audioStream={audioStream} handleAudioReset={handleAudioReset}/>
