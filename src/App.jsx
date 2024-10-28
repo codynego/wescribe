@@ -14,7 +14,7 @@ function App() {
   const [audioChunks, setAudioChunks] = useState([])
   const [duration, setDuration] = useState(0)
   const [isLoading, setLoading] = useState(true)
-  const [output, setOutput] = useState(null)
+  const [output, setOutput] = useState(true)
 
 
   const isAudioAvailable = audioStream || file
